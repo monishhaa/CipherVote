@@ -9,6 +9,10 @@ __pycache__/
 .pytest_cache/
 backend/.pytest_cache/
 data/outbox/
+data/emails/
 data/backup/
 data/lfw/
+frontend/dist/
+*.bak
+*.bak_*
 .DS_Store

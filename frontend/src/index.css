@@ -1,0 +1,185 @@
+@import "@fontsource/fraunces/400.css";
+@import "@fontsource/fraunces/600.css";
+@import "@fontsource/fraunces/700.css";
+@import "@fontsource/public-sans/400.css";
+@import "@fontsource/public-sans/500.css";
+@import "@fontsource/public-sans/600.css";
+@import "@fontsource/public-sans/700.css";
+@import "@fontsource/jetbrains-mono/400.css";
+@import "@fontsource/jetbrains-mono/500.css";
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --paper: #F6F3EC;
+  --paper-2: #EDE8DD;
+  --line: #D9D2C3;
+  --ink: #11161F;
+  --ink-2: #1A212D;
+  --ink-3: #252E3D;
+  --on-ink: #E8E4DA;
+  --on-ink-muted: #9AA3B2;
+  --primary: #16294A;
+  --primary-hover: #1F3A66;
+  --accent: #B8452B;
+  --text: #1B2330;
+  --text-muted: #5C6675;
+  --success: #2E6B4F;
+  --warning: #A8641A;
+  --danger: #A12B2B;
+  --info: #2C5282;
+}
+
+body {
+  margin: 0;
+  background-color: var(--paper);
+  color: var(--text);
+  font-family: "Public Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Dark theme form-control color scheme and explicit contrast */
+.bg-ink, .bg-ink-2, .ink-theme {
+  color-scheme: dark;
+}
+
+/* Explicit native input, select, and textarea contrast for dark theme */
+.bg-ink input,
+.bg-ink-2 input,
+.bg-ink select,
+.bg-ink-2 select,
+.bg-ink textarea,
+.bg-ink-2 textarea {
+  color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+}
+
+.bg-ink input::placeholder,
+.bg-ink-2 input::placeholder,
+.bg-ink textarea::placeholder,
+.bg-ink-2 textarea::placeholder {
+  color: rgba(232, 228, 218, 0.4) !important;
+}
+
+/* Browser Autofill Styling Overrides */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #11161F inset !important;
+  -webkit-text-fill-color: #FFFFFF !important;
+  caret-color: #FFFFFF !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+.bg-paper input:-webkit-autofill,
+.bg-paper input:-webkit-autofill:hover,
+.bg-paper input:-webkit-autofill:focus,
+.bg-paper input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 1000px #F6F3EC inset !important;
+  -webkit-text-fill-color: #1B2330 !important;
+  caret-color: #1B2330 !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+h1, h2, h3, .font-display {
+  font-family: "Fraunces", Georgia, serif;
+  letter-spacing: -0.02em;
+}
+
+code, kbd, samp, pre, .font-mono {
+  font-family: "JetBrains Mono", ui-monospace, monospace;
+}
+
+/* Hairline borders and custom utilities */
+.hairline-b {
+  border-bottom: 1px solid var(--line);
+}
+.hairline-t {
+  border-top: 1px solid var(--line);
+}
+.hairline-r {
+  border-right: 1px solid var(--line);
+}
+.hairline-l {
+  border-left: 1px solid var(--line);
+}
+.hairline-all {
+  border: 1px solid var(--line);
+}
+
+/* Ink mode hairlines */
+.ink-mode .hairline-b {
+  border-bottom: 1px solid #252E3D;
+}
+.ink-mode .hairline-t {
+  border-top: 1px solid #252E3D;
+}
+.ink-mode .hairline-r {
+  border-right: 1px solid #252E3D;
+}
+.ink-mode .hairline-l {
+  border-left: 1px solid #252E3D;
+}
+.ink-mode .hairline-all {
+  border: 1px solid #252E3D;
+}
+
+/* Focus styles */
+*:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Tabular numerals for dense tabular figures */
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Subtle scrollbars */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #C7C0B0;
+  border-radius: 2px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A8A08E;
+}
+.ink-mode ::-webkit-scrollbar-thumb {
+  background: #333F52;
+}
+.ink-mode ::-webkit-scrollbar-thumb:hover {
+  background: #4A5B75;
+}
+
+/* Keep typed and autofilled text readable in both themes. */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+textarea:-webkit-autofill,
+select:-webkit-autofill {
+  -webkit-text-fill-color: var(--ink);
+  caret-color: var(--ink);
+  box-shadow: 0 0 0 1000px var(--paper) inset;
+  transition: background-color 9999s ease-out;
+}
+.bg-ink input:-webkit-autofill,
+.bg-ink input:-webkit-autofill:hover,
+.bg-ink input:-webkit-autofill:focus,
+.bg-ink textarea:-webkit-autofill,
+.bg-ink select:-webkit-autofill {
+  -webkit-text-fill-color: var(--on-ink);
+  caret-color: var(--on-ink);
+  box-shadow: 0 0 0 1000px var(--ink) inset;
+}

@@ -147,9 +147,6 @@ async def test_election_edit_archive_delete_and_isolation():
         assert counts[id_a] == 0
         assert counts[id_b] == 1
 
-        blocked = await client.delete(f"/api/admin/elections/{id_b}", headers=headers)
-        assert blocked.status_code == 400
-
         removed = await client.delete(f"/api/admin/elections/{id_a}", headers=headers)
         assert removed.status_code == 200, removed.text
 
@@ -171,3 +168,12 @@ async def test_election_edit_archive_delete_and_isolation():
         public = await client.get("/api/public/elections")
         public_ids = [item["election_id"] for item in public.json()["elections"]]
         assert id_b not in public_ids
+
+        removed_with_voters = await client.delete(f"/api/admin/elections/{id_b}", headers=headers)
+        assert removed_with_voters.status_code == 200, removed_with_voters.text
+        listed_final = await client.get("/api/admin/elections", headers=headers)
+        remaining_ids = [item["election_id"] for item in listed_final.json()["elections"]]
+        assert id_b not in remaining_ids
+        async with AsyncSessionLocal() as db:
+            leftover = (await db.execute(select(Voter).where(Voter.election_id == id_b))).scalars().first()
+            assert leftover is None

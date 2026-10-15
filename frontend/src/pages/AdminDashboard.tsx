@@ -267,6 +267,13 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
   // Voting Control Modals
   const [showOpenConfirmModal, setShowOpenConfirmModal] = useState<boolean>(false);
   const [showCloseConfirmModal, setShowCloseConfirmModal] = useState<boolean>(false);
+  const [deleteStep, setDeleteStep] = useState<0 | 1 | 2>(0);
+  const [pendingDelete, setPendingDelete] = useState<{
+    election_id: string;
+    title: string;
+    registered_voters: number;
+    ballots_cast: number;
+  } | null>(null);
   const [closeConfirmInput, setCloseConfirmInput] = useState<string>('');
 
   // Trustee Portal State (Starts EMPTY for clean state)
@@ -595,8 +602,15 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
     setMsg('New election created successfully. Follow the Setup Checklist to complete configuration.');
   };
 
-  const handleDeleteElection = async (elId: string) => {
-    if (!window.confirm('Are you sure you want to delete this election? This cannot be undone.')) return;
+  const closeDeleteDialog = () => {
+    setDeleteStep(0);
+    setPendingDelete(null);
+  };
+
+  const handleDeleteElection = async () => {
+    if (!pendingDelete || deleteStep !== 2) return;
+    const elId = pendingDelete.election_id;
+    const title = pendingDelete.title;
     try {
       const res = await fetch(`/api/admin/elections/${encodeURIComponent(elId)}`, {
         method: 'DELETE',
@@ -607,7 +621,12 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
         const parsed = formatApiError(data);
         throw new Error(parsed.message);
       }
-      setMsg(data.message || 'Election deleted successfully.');
+      closeDeleteDialog();
+      setMsg(data.message || `Election "${title}" deleted.`);
+      if (activeElectionId === elId) {
+        setActiveElectionId('');
+        navigateTo?.('/admin/elections');
+      }
       fetchElectionsList();
     } catch (err: any) {
       setErrorMsg(err.message || 'Failed to delete election.');
@@ -1338,16 +1357,21 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                               Archive
                             </button>
                           )}
-                          {el.registered_voters === 0 && (
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteElection(el.election_id)}
-                              className="p-1.5 text-on-ink/40 hover:text-red-400 transition"
-                              title="Delete election"
-                            >
-                              <Trash2 className="w-4 h-4" />
-                            </button>
-                          )}
+                          <button
+                            type="button"
+                            onClick={() => {
+                              setPendingDelete({
+                                election_id: el.election_id,
+                                title: el.title,
+                                registered_voters: el.registered_voters || 0,
+                                ballots_cast: el.ballots_cast || 0,
+                              });
+                              setDeleteStep(1);
+                            }}
+                            className="px-3 py-1.5 bg-ink text-xs font-mono text-red-300 border border-ink-3 rounded hover:bg-ink-3"
+                          >
+                            Delete
+                          </button>
                         </div>
                       </div>
 
@@ -2850,6 +2874,60 @@ export const AdminDashboard: React.FC<AdminDashboardProps> = ({
                   {isLoadingAction ? 'Opening...' : 'Confirm Open Voting'}
                 </button>
               </div>
+            </div>
+          </div>
+        )}
+
+        {pendingDelete && deleteStep > 0 && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center p-4 z-50">
+            <div className="bg-ink-2 border border-red-900/60 rounded-xl p-6 max-w-md w-full shadow-2xl">
+              {deleteStep === 1 ? (
+                <>
+                  <h3 className="font-display text-lg font-bold text-white mb-2">Delete this election?</h3>
+                  <p className="text-xs text-red-200 leading-relaxed mb-4">
+                    Warning: deleting <span className="font-semibold text-white">{pendingDelete.title}</span> permanently removes that election from the database. Its voter roll ({pendingDelete.registered_voters}), ballots ({pendingDelete.ballots_cast}), trustees, notifications, and results are deleted with it. This cannot be undone.
+                  </p>
+                  <div className="flex justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={closeDeleteDialog}
+                      className="px-4 py-2 bg-ink border border-ink-3 text-xs text-on-ink/80 rounded hover:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setDeleteStep(2)}
+                      className="px-4 py-2 bg-red-600 text-white font-semibold text-xs rounded hover:bg-red-500 font-mono"
+                    >
+                      Continue
+                    </button>
+                  </div>
+                </>
+              ) : (
+                <>
+                  <h3 className="font-display text-lg font-bold text-white mb-2">Confirm deletion</h3>
+                  <p className="text-xs text-red-200 leading-relaxed mb-4">
+                    This is the second confirmation. <span className="font-semibold text-white">{pendingDelete.title}</span> will be deleted now. There is no way to restore it.
+                  </p>
+                  <div className="flex justify-end gap-3">
+                    <button
+                      type="button"
+                      onClick={closeDeleteDialog}
+                      className="px-4 py-2 bg-ink border border-ink-3 text-xs text-on-ink/80 rounded hover:text-white"
+                    >
+                      Cancel
+                    </button>
+                    <button
+                      type="button"
+                      onClick={handleDeleteElection}
+                      className="px-4 py-2 bg-red-600 text-white font-semibold text-xs rounded hover:bg-red-500 font-mono"
+                    >
+                      Delete election
+                    </button>
+                  </div>
+                </>
+              )}
             </div>
           </div>
         )}

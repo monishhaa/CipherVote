@@ -345,26 +345,18 @@ async def delete_admin_election(
     _admin: str = Depends(require_admin),
     db: AsyncSession = Depends(get_db),
 ):
-    """Deletes an election if zero voters are registered."""
+    """Deletes an election and the rows stored for it."""
     el_res = await db.execute(select(Election).where(Election.election_id == election_id))
     election = el_res.scalars().first()
     if not election:
         raise HTTPException(status_code=404, detail="Election not found")
-
-    v_count = (
-        await db.execute(select(func.count(Voter.id)).where(Voter.election_id == election_id))
-    ).scalar() or 0
-    if v_count > 0:
-        raise HTTPException(
-            status_code=400,
-            detail="Cannot delete election: Voters have already registered. You may archive the election instead.",
-        )
 
     await db.execute(delete(Trustee).where(Trustee.election_id == election_id))
     await db.execute(delete(Ballot).where(Ballot.election_id == election_id))
     await db.execute(delete(Notification).where(Notification.election_id == election_id))
     await db.execute(delete(EmailOutbox).where(EmailOutbox.election_id == election_id))
     await db.execute(delete(TallyResult).where(TallyResult.election_id == election_id))
+    await db.execute(delete(Voter).where(Voter.election_id == election_id))
     await db.execute(delete(Election).where(Election.election_id == election_id))
     await db.commit()
 

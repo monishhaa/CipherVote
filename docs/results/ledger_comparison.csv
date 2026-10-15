@@ -1,0 +1,5 @@
+metric,append_only_hash_chain,poa_blockchain_ledger,unit
+throughput,700167.8,5322106.6,tx/sec
+confirmation_latency,0.001,0.009,ms
+storage_overhead,139.4,20.4,bytes/ballot
+infrastructure_cost,Zero Gas / Single Hash-Chain,Validator Network / Gas Overhead,qualitative

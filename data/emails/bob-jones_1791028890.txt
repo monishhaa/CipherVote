@@ -1,0 +1,23 @@
+SECUREVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: Student Council 2026
+Voter ID: bob-jones
+Full Name: Bob Jones
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0x305838fc57427b7ff3dadfe3887989e015d96753c2b2f6f43c0e4bc3d71b45ff11f52e9c41ad6c06fef21e910da60f69748913e861e2b03b1b15344709acae43eda0cb7ab2a816c5226c757146f97fe24bd5f5e9fb28c6aa5f0ac49555cb417de1a6287ded3b5aad0506923b29b7793170d7bd4851f2e5adf577fe80b420368ecc410259695026c79a4b43a1b8bee72a827db6d69975077b4ee1102f257cb2b8c7bc8de059b452ed71acd7a5cee2dc86b514f00087966e635e04c4e8e9ef2f78e3c5beb2dd410c69150e06e5661f426fbea08d94ead68204037cd739466d5702c5ec18d89a9c9d6853dd26a308e2449210d526f66aa672f589897fbb1dbcbc0b
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the SecureVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (bob-jones) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+SecureVote Verifiable Election System

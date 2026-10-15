@@ -1,0 +1,23 @@
+SECUREVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: Student Council 2026
+Voter ID: alice-smith
+Full Name: Alice Smith
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0x54de688cf44123e84a4f68ae7b34422223a96ffec4b8a5751a383d125ca14df19f97cf152807d4961a4b060bbeb1cdd2ef1e6bacfe163053145c58e4f0548f9b48f07d5b9da43b77a35f83ec7b1ed9b30ee11bdf58aa542b09520b424b1806061494b421059b024adfe069fe69585fded83db2e1230fa4cbad955c5667bae0739eb9ee28b7aa0423733dd23b0e21176532b41061e45eded0030a7dc62b83b292e97c97d9d1cf11c49364c2c078ebe53a7eb9dacf5789215c3dc488a4f7db6a82b69b92a6f850fe8e7e2fc0504bf1ed794b0437b143b1f510341dbd50fb9bb89773673fb3d4368f9f7dea2d2a9a3e4d211568ed5b2f010d35d8391db71794743d
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the SecureVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (alice-smith) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+SecureVote Verifiable Election System

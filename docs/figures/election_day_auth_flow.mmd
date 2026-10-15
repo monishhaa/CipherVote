@@ -1,0 +1,29 @@
+sequenceDiagram
+    autonumber
+    actor Voter as Voter (Browser)
+    participant Server as SecureVote Server
+    participant Liveness as Active Liveness Engine
+    participant BlindSigner as Chaum RSA Signer
+    participant DB as SQLite DB
+
+    Note over Voter,Server: Election Phase = OPEN (Wall-clock >= T_open)
+    Voter->>Server: GET /api/voters/share_b/{voter_id}
+    Server->>Server: Verify Election Status == OPEN
+    Server->>DB: Decrypt Share B using K_timelock
+    Server-->>Voter: Return { share_b: Share B }
+
+    Voter->>Voter: Reconstruct Secret S' = (Share A + Share B) mod Q
+    Voter->>Voter: Generate 256-bit Random Token Nonce N_token
+    Voter->>Voter: Blind Nonce: m' = (N_token * r^e) mod N_rsa
+
+    Voter->>Voter: Complete Liveness Challenge (Blink + Head Turn)
+    Voter->>Server: POST /api/auth/blind-token { voter_id, share_a, share_b, blinded_token: m', liveness_telemetry }
+    Server->>Server: Verify SHA256(Share A + Share B) == Stored Commitment C
+    Server->>Liveness: Verify EAR < 0.22 (Blink) & Yaw < -8.0 deg (Turn)
+    Server->>Server: Check Voter Has Not Received Blind Signature
+    Server->>BlindSigner: Sign Blinded Token: s' = (m')^d mod N_rsa
+    Server->>DB: Mark voter_id as TOKEN_ISSUED
+    Server-->>Voter: Return { blind_signature: s' }
+
+    Voter->>Voter: Unblind Signature: s = (s' * r^(-1)) mod N_rsa
+    Note over Voter: Voter now possesses valid pair (N_token, s) unlinked to voter_id

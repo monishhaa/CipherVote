@@ -1,0 +1,23 @@
+CIPHERVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: something
+Voter ID: 1DT23IS11
+Full Name: Monisha
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0x6a282b140396ae4921233e5fd03a31b777ff2761bccc4fc4bc23342f65b3be97c7d76c396ef766d75706f19a863c10887cc81c70586b6010567ef90417fb7a6f6cba318c65eb5d2dc6bdbf00cb6450c1f47a5a8893ba9d1a764af6cffbcc06e1afa74cb9df5a8055220fdb06ac4464968c1b267d4506b8825925c69868910b8ea0ff80251ff255ee06fdb31566d8600f4e48382e4d2fb22e73ca4f9432c97a2dc682c71621b43306469353fd85e14dfc06dabfe632719e292d281d3a2354a5e19d04f9a7f412962e25a0b596347e1e3a37b015bae2211d8f4fd368c50231ca9858c42cce1896b5848d0b8d8f9aeb77b25c31a7099e6f2a73ac94e1e5f12a8e15
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the CipherVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (1DT23IS11) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+CipherVote Verifiable Election System

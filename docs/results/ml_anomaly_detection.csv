@@ -1,0 +1,3 @@
+model_name,model_type,test_samples,accuracy_pct,precision_pct,recall_pct,f1_score_pct,roc_auc_pct
+Random Forest,Supervised Classifier,2000,100.00,100.00,100.00,100.00,100.00
+Isolation Forest,Unsupervised Anomaly Detector,2000,84.50,56.43,98.75,71.82,97.92

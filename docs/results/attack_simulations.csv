@@ -1,0 +1,5 @@
+attack_vector,trials,blocked,defense_rate_pct,primary_defense_mechanism
+stolen_share_attack,50,50,100.00,Shamir 2-of-2 secret reconstruction & SHA-256 commitment check failure
+biometric_spoof_attack,50,50,100.00,Eye Aspect Ratio (EAR) temporal variance and yaw angle challenge check
+token_replay_attack,50,50,100.00,Unique blind token nonce registration and spent token rejection on bulletin board
+ballot_stuffing_attack,50,50,100.00,Disjunctive Chaum-Pedersen 1-of-2 ZKP and Sum-to-One equality ZKP verification

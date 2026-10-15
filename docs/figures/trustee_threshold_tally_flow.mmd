@@ -1,0 +1,40 @@
+sequenceDiagram
+    autonumber
+    actor Admin as Election Admin
+    participant BB as Public Bulletin Board
+    participant Aggregator as Homomorphic Aggregator
+    actor T1 as Trustee 1 (Share s_1)
+    actor T2 as Trustee 2 (Share s_2)
+    actor T3 as Trustee 3 (Share s_3)
+    participant Decryptor as Threshold Decryptor & DLog Solver
+    actor Auditor as Public Auditor
+
+    Admin->>BB: Close Election (Status = TALLYING)
+    BB->>Aggregator: Fetch All N Valid Ballots
+    Aggregator->>Aggregator: For each candidate k: A_k = Prod(alpha_j) mod p, B_k = Prod(beta_j) mod p
+    Note over Aggregator: Combined Homomorphic Ciphertext: (A_k, B_k) = E(Sum v_k)
+
+    Aggregator->>T1: Request Partial Decryption for (A_k, B_k)
+    T1->>T1: Compute D_1 = (A_k)^(s_1) mod p
+    T1->>T1: Generate Chaum-Pedersen DLEQ Proof: Proof that log_g(h_1) == log_{A_k}(D_1)
+    T1-->>Decryptor: Return (D_1, DLEQ_Proof_1)
+
+    Aggregator->>T2: Request Partial Decryption for (A_k, B_k)
+    T2->>T2: Compute D_2 = (A_k)^(s_2) mod p + DLEQ Proof 2
+    T2-->>Decryptor: Return (D_2, DLEQ_Proof_2)
+
+    Aggregator->>T3: Request Partial Decryption for (A_k, B_k)
+    T3->>T3: Compute D_3 = (A_k)^(s_3) mod p + DLEQ Proof 3
+    T3-->>Decryptor: Return (D_3, DLEQ_Proof_3)
+
+    Decryptor->>Decryptor: Verify 3 DLEQ Proofs against Trustee Public Keys
+    Decryptor->>Decryptor: Compute Lagrange Coefficients lambda_1, lambda_2, lambda_3 mod q
+    Decryptor->>Decryptor: Reconstruct D_total = Prod(D_i^(lambda_i)) = (A_k)^x mod p
+    Decryptor->>Decryptor: Compute M_k = (B_k * D_total^(-1)) mod p = g^(Tally_k) mod p
+    Decryptor->>Decryptor: Solve Discrete Log: Tally_k = log_g(M_k) (Baby-Step Giant-Step / Table Lookup)
+    Decryptor->>BB: Publish Final Tallies + Partial Decryptions + DLEQ Proofs (Status = RESULTS)
+
+    Auditor->>BB: Verify Bulletin Board Hash Chain
+    Auditor->>BB: Re-multiply all ciphertexts to check (A_k, B_k)
+    Auditor->>BB: Verify all DLEQ Proofs and Lagrange interpolation
+    Note over Auditor: Election is Universally Verified!

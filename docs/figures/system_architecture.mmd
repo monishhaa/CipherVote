@@ -1,0 +1,56 @@
+graph TB
+    subgraph ClientLayer ["Client Layer (Web Browser)"]
+        UI["React 18 Single Page Application"]
+        CryptoClient["Client-Side Crypto Engine<br/>• Exponential ElGamal Encrypter<br/>• Chaum-Pedersen 1-of-2 ZKP<br/>• Sum-to-One Equality ZKP<br/>• RSA Blind Token Generator"]
+        CamCapture["Facial Capture & Liveness<br/>• OpenCV / MediaStream Capture<br/>• EAR & Yaw Telemetry"]
+    end
+
+    subgraph APILayer ["API Gateway Layer (FastAPI)"]
+        RouterAuth["Auth & Blind Token Router<br/>/api/auth/*"]
+        RouterVoter["Voter Registration Router<br/>/api/voters/*"]
+        RouterBallot["Ballot Ingestion Router<br/>/api/ballots/*"]
+        RouterTally["Trustee & Tally Router<br/>/api/tally/*"]
+        RouterBB["Public Bulletin Board Router<br/>/api/bulletin-board/*"]
+    end
+
+    subgraph CoreCrypto ["Core Cryptographic & ML Services"]
+        ShamirVault["2-of-2 Shamir Vault<br/>• Secret Split & Reconstruction<br/>• Time-Lock Encryption"]
+        FaceEngine["Biometric Engine<br/>• 128-d Embedding Extraction<br/>• AES-256-GCM Vault<br/>• Active Liveness Verifier"]
+        ZKPEngine["Zero-Knowledge Proof Verifier<br/>• Non-interactive Fiat-Shamir"]
+        MLDetector["ML Anomaly Detector<br/>• Random Forest<br/>• Isolation Forest"]
+        BBEngine["Merkle Hash-Chain Engine<br/>• Append-Only SHA-256 Ledger"]
+    end
+
+    subgraph StorageLayer ["Persistence Layer"]
+        SQLiteDB[("SQLite Database<br/>• Voters Table<br/>• Ballots Ledger<br/>• Election State<br/>• Audit Logs")]
+    end
+
+    subgraph TrusteeNetwork ["Trustee Threshold Network (3-of-5)"]
+        T1["Trustee Share 1"]
+        T2["Trustee Share 2"]
+        T3["Trustee Share 3"]
+        T4["Trustee Share 4"]
+        T5["Trustee Share 5"]
+    end
+
+    UI --> CryptoClient
+    UI --> CamCapture
+    CryptoClient --> RouterBallot
+    CamCapture --> RouterAuth
+    UI --> RouterVoter
+    UI --> RouterTally
+    UI --> RouterBB
+
+    RouterVoter --> ShamirVault
+    RouterVoter --> FaceEngine
+    RouterAuth --> ShamirVault
+    RouterAuth --> FaceEngine
+    RouterAuth --> MLDetector
+    RouterBallot --> ZKPEngine
+    RouterBallot --> BBEngine
+    RouterTally --> TrusteeNetwork
+    
+    BBEngine --> SQLiteDB
+    ShamirVault --> SQLiteDB
+    FaceEngine --> SQLiteDB
+    RouterBallot --> SQLiteDB

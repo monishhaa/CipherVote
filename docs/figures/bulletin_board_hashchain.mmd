@@ -1,0 +1,26 @@
+graph LR
+    subgraph Block0 ["Genesis Anchor"]
+        G_H["Genesis Hash H_0<br/>0x0000...0000"]
+    end
+
+    subgraph Block1 ["Ballot 1 (Seq #1)"]
+        B1_Data["Payload 1<br/>• Ciphertexts [(alpha_i, beta_i)]<br/>• ZKPs<br/>• Token Sig<br/>• Timestamp T_1"]
+        B1_Hash["Entry Hash H_1<br/>SHA256(1 || T_1 || P_1 || H_0)<br/>Receipt: A93F-7C21..."]
+    end
+
+    subgraph Block2 ["Ballot 2 (Seq #2)"]
+        B2_Data["Payload 2<br/>• Ciphertexts [(alpha_i, beta_i)]<br/>• ZKPs<br/>• Token Sig<br/>• Timestamp T_2"]
+        B2_Hash["Entry Hash H_2<br/>SHA256(2 || T_2 || P_2 || H_1)<br/>Receipt: 8E42-9901..."]
+    end
+
+    subgraph BlockN ["Ballot N (Seq #N)"]
+        BN_Data["Payload N<br/>• Ciphertexts [(alpha_i, beta_i)]<br/>• ZKPs<br/>• Token Sig<br/>• Timestamp T_N"]
+        BN_Hash["Entry Hash H_N<br/>SHA256(N || T_N || P_N || H_N-1)<br/>Receipt: 33F0-18D2..."]
+    end
+
+    G_H --> B1_Hash
+    B1_Data --> B1_Hash
+    B1_Hash --> B2_Hash
+    B2_Data --> B2_Hash
+    B2_Hash -.-> BN_Hash
+    BN_Data --> BN_Hash

@@ -1,0 +1,23 @@
+sequenceDiagram
+    autonumber
+    actor Voter as Voter (Browser)
+    participant Server as SecureVote Server
+    participant ZKPVerifier as ZKP Proof Verifier
+    participant BB as Append-Only Bulletin Board
+    participant DB as SQLite DB
+
+    Note over Voter: Voter selects candidate index k in {0, ..., m-1}
+    Voter->>Voter: For each candidate i: v_i = 1 if i==k else 0
+    Voter->>Voter: Sample random r_i in Z_q*
+    Voter->>Voter: Compute Exponential ElGamal: alpha_i = g^(r_i) mod p, beta_i = (h^(r_i) * g^(v_i)) mod p
+    Voter->>Voter: Generate Disjunctive Chaum-Pedersen ZKP: Proof that v_i in {0, 1}
+    Voter->>Voter: Generate Sum-to-One ZKP: Proof that Sum(v_i) == 1 (r_sum = Sum(r_i) mod q)
+
+    Voter->>Server: POST /api/ballots/cast { ciphertexts: [(alpha_i, beta_i)], zkp_proofs, token_nonce, token_signature }
+    Server->>Server: Verify RSA Blind Signature: (token_signature)^e == H(token_nonce) mod N_rsa
+    Server->>Server: Verify token_nonce not in Spent Tokens Table
+    Server->>ZKPVerifier: Verify all m Disjunctive 1-of-2 ZKPs
+    Server->>ZKPVerifier: Verify Sum-to-One Equality ZKP
+    Server->>BB: Append Ballot to Hash Chain: H_i = SHA256(Seq || Time || Payload || Prev_H)
+    Server->>DB: Store Ballot & Mark token_nonce as SPENT
+    Server-->>Voter: Return { status: "ACCEPTED", receipt_code: H_i[0:16], sequence_number: i }

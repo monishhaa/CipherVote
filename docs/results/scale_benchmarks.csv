@@ -1,0 +1,4 @@
+voters,client_encrypt_zkp_ms,bb_ingestion_tps,homomorphic_agg_sec,threshold_decryption_sec,total_tally_sec
+1000,424.72,1000000.0,0.0512,0.2152,0.2664
+5000,425.04,4255167.2,0.2679,0.2107,0.4786
+10000,426.29,4257886.5,0.5143,0.2109,0.7252

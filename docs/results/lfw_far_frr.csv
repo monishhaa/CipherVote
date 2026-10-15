@@ -1,0 +1,3 @@
+dataset,split,pairs_count,optimal_threshold,accuracy_pct,far_pct,frr_pct,eer_pct
+LFW Deep-Funneled,DevTrain (Calibration),2200,0.7274,57.55,42.45,42.45,42.45
+LFW Deep-Funneled,DevTest (Independent Evaluation),1000,0.7274,58.40,44.00,39.20,41.40

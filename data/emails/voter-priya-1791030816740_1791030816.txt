@@ -1,0 +1,23 @@
+SECUREVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: Student Council 2026
+Voter ID: voter-priya-1791030816740
+Full Name: Priya Sharma
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0xa39f970750c75f252f4af1a1a727218b4ae4db8413f15ea7b4cdb3a3ab32b7ff4b4b9a5363d9b177d7ac30eacac28f193ae48f3ed3a8d80af52c828fe6ff5f869281fbafe7fd88360ebaefea743d6affdae821fde3d1cb9c86186baac4bec14273cd699df33932f0c7d9c3b975db42574cf43d76b2e54b2f8a7c8c1c920b5f3e5ee5c9e1f96ace0c96c6fc4bd78b3f252d808f6f94d87f8bd9c2eb3b41872e59f7eeaabf789956829c45ba285277e4b67140f88335fd3a887c30a650f35c6f4ba0c7777dd9f39b1ff4c9c687f383110b9f51513bc0123b6486c6749f0891f337910635146fcf1874b107437fe5a1b21a55a40eefd5e3b0da4c5e8adffa282da
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the SecureVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (voter-priya-1791030816740) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+SecureVote Verifiable Election System

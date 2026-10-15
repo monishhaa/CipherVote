@@ -1,0 +1,23 @@
+SECUREVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: VGZ HEAD
+Voter ID: 1DT23CS11
+Full Name: Monisha
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0x6ae0458b087dd9b2b14188de2fbc08678a5fd7114d1847e6ece7ac24fbe1176be02e04db6e2641025ee42c4c2a15452c1afecba58d7a44e363f96dc0b9e2ac04102dd3d6569c4ba6aec8d0243963d3b15696b78d76d0faea1f3bf1b40182ca5d6d48857cb71f636b876065389f87eb7892f7be607f2d26277a25bef345c541fd3167ffaa39bbc8f0488b6e3fcc7008cb00af51276de9bd87cf503598e30725fc1065794052b3690e6184fce93e28e346eb1f7a431d7e1a489351b0446bedc501d43cae34d22862b8ace154baf99bef9567d7725af0142f33077b51204e6842a7102b09cce6a33d6386258823fb7c84a36831a63328bab0344fa666360354b0a5
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the SecureVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (1DT23CS11) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+SecureVote Verifiable Election System

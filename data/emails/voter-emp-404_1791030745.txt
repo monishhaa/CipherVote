@@ -1,0 +1,23 @@
+SECUREVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: Acme Corp Annual Board Election 2026
+Voter ID: voter-emp-404
+Full Name: Dr. Sarah Connor
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0x67ecec4fb52650a9451193616ffa4b37377382fabce72aba5da4e69481bc9b76ac373fc54a07e2e7cd340abeda988578a07d97ec9e45e98931ba657878e412c39dec86e235bd09d871f53e5a933a09e32bd258f908b9d301c70891f46e7adb97081625170157ed2aa6871cb7a30f57f572fd5d679671e4fe82c0943d203c983f07e526360effb4541796313b5ef1775873bcfeacdb508bf5be2743f43cd40e6a0e954a3892ec74a58a336d2e621a3f5cb1cccd778de0a9c8306bbf9809f8868604ed7bdd59beaafd64f3fb225a399cf261a231cc1c18770c6487282b934d1b5312e978d36e6fbd672b8267b40698b0e2a0eeb21ac5551c132a0beb7c2bf03ec7
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the SecureVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (voter-emp-404) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+SecureVote Verifiable Election System

@@ -1,0 +1,23 @@
+CIPHERVOTE VOTER CREDENTIAL CARD
+=====================================================
+Election: Performance Benchmark Election
+Voter ID: eval-voter-8
+Full Name: Voter 8
+
+YOUR SECRET SHARE A (VOTING PASSWORD):
+-----------------------------------------------------
+0x5586f613d751039390e8eb1f8f2c188b8dd246904f9c019ab737e5a946529341a38c69f59bc92b50cf5125ffff2f27bd007df8ba109e884c29df22cba2e1c3233e8dedd4695bda43581e4300bea5e6d8738bb13401a757bc920766bd7c7130647f6448d8f5b0512705bb686528456ccbf3ebbc1a479a307411bb56c91131d07a86f22bfccad85814a58ba7f9e7a568d64637aed6fe0840ff6c2176e821f60cb52303d8adc18c83eb409d916bb9f5ce9e824306cfd446980600824b1d4cd367626403e039fccfb233d10210c38afe1268b90e5ae67503e72a1b6ea44b9d5916c74585d931f582513c89211f098c31a3138c3b5648013f3ba28cbd0602abb42f4
+-----------------------------------------------------
+
+HOW TO VOTE ON ELECTION DAY:
+1. Open the CipherVote portal and click on '2. Election Voting'.
+2. Enter your Voter ID (eval-voter-8) and paste the Secret Share A provided above.
+3. Complete the active facial liveness check (e.g. blink or turn head) to receive your anonymous ballot token.
+4. Select your candidate and cast your encrypted ballot!
+
+SECURITY & PRIVACY NOTICE:
+- Keep this email and your Secret Share A strictly private.
+- The server holds Share B in a time-locked cryptographic vault until election opening.
+- Your vote is encrypted in your browser using 2048-bit ElGamal with Zero-Knowledge Proofs. The election authority CANNOT see who you voted for.
+
+CipherVote Verifiable Election System

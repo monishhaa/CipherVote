@@ -1,0 +1,22 @@
+sequenceDiagram
+    autonumber
+    actor Voter as Voter (Browser)
+    participant Server as SecureVote Server
+    participant FaceEngine as Face Biometric Engine
+    participant CryptoVault as Credential Vault (Shamir)
+    participant DB as SQLite DB
+
+    Voter->>Voter: Capture Live Face Snapshot
+    Voter->>Server: POST /api/voters/process-face { image_base64 }
+    Server->>FaceEngine: Detect Single Face & Extract 128-d Embedding e
+    FaceEngine-->>Server: Return Embedding Vector e
+    Server-->>Voter: { status: "success", embedding: e }
+
+    Voter->>Server: POST /api/voters/register { voter_id, email, face_embedding }
+    Server->>CryptoVault: Generate 256-bit Random Secret S
+    CryptoVault->>CryptoVault: Compute Commitment C = SHA256(S)
+    CryptoVault->>CryptoVault: Split S into (Share A, Share B) via 2-of-2 Shamir
+    CryptoVault->>FaceEngine: Encrypt Embedding e with AES-256-GCM (Master Key K_bio)
+    Server->>DB: Store (voter_id, email, C, Enc(Share B, K_timelock), Enc(e), status="REGISTERED")
+    Server-->>Voter: Return { voter_id, share_a: Share A, commitment: C }
+    Voter->>Voter: Store Share A Safely (Credential Card)
